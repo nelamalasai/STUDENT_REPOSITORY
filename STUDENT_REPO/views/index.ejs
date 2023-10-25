@@ -1,0 +1,53 @@
+
+<%- include('include/_header') %>
+
+    <main id="site-main">
+        <div class="container">
+            <div class="box-nav d-flex justify-between">
+                <a href="/addUser" class="border-shadow">
+                    <span class="text-gradient">New User <i class="fas fa-user"></i></span>
+                </a>
+                <select id="selectType">
+                    <option>Select</option>
+                    <option value="name">Name</option>
+                    <option value="email">Email</option>
+                    <option value="phone">Phone</option>
+                    <option value="gender">Gender</option>
+                    <option value="location">Location</option>
+                    <option value="address">Address</option>
+                  </select>
+                <input type="text" style="background-color:#EFEFEF ;border-radius: 10px;" name="search" onkeyup="sendData(this)"/>
+                <a onclick="getUser()" class="border-shadow hoverclass">
+                    <span class="text-gradient">Generate User <i class="fas fa-user"></i></span>
+                </a>
+            </div>
+            <br>
+            <br>
+            <h2>Recently Added Users</h2>
+            <form action="/" method="POST">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Profile</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>City</th>
+                            <th>Gender</th>
+                            <th>Phone</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%- include('include/_show') %>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+             
+                <table class="table" id="searchResults">
+                  
+                </table>
+            </form>
+        </div>
+    </main>
+<%- include('include/_footer') %>

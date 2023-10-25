@@ -1,0 +1,112 @@
+<%- include('include/_header') %>
+    <main id="site-main">
+        <div class="container">
+            <img class=""style="border-radius: 50%;  object-position: center;width: 10%; display: block;margin-left: auto;margin-right: auto;"src="<%=user.thumbnail%> " alt="">
+            <div class="box-nav d-flex justify-between">
+                <div class="filter">
+                    <a href="/"><i class="fas fa-angle-double-left"></i> All Users</a>
+                </div>
+            </div>
+            <div class="form-title text-center">
+                <h2 class="text-dark">Update User</h2>
+                <span class="text-light">Fill the below form to update an existing user</span>
+            </div>
+            <form id="update_user">
+                <div class="new_user">
+                    <div class="form-group">
+                        <label for="link" class="text-light">Edit Profile</label>
+                        <input type="text" name="first" id="thumbnail" value="<%= user.thumbnail%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="text-light">First Name</label>
+                        <input type="text" name="first" id="first" value="<%= user.name.first%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="text-light">Last Name</label>
+                        <input type="text" id="last" value="<%= user.name.last%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="text-light">Email</label>
+                        <input type="text" name="email" id="email" value="<%= user.email%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="text-light">Phone</label>
+                        <input type="text" name="phone" id="phonenumber" value="<%= user.phone%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="text-light">City</label>
+                        <input type="text" name="city" id="city" value="<%= user.location.city%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="text-light">State</label>
+                        <input type="text" name="state" id="state" value="<%= user.location.state%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="text-light">Country</label>
+                        <input type="text" name="country" id="country" value="<%= user.location.country%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="text-light">Post Code</label>
+                        <input type="text" name="postcode" id="pincode" value="<%= user.location.postcode%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="text-light">Username</label>
+                        <input type="text" name="username" id="username" value="<%= user.login.username%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="text-light">Password</label>
+                        <input type="text" name="password" id="password" value="<%= user.login.password%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="text-light">Date Of Birth</label>
+                        <input type="text" name="dob" id="date" value="<%= user.dob.date%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="text-light">Age</label>
+                        <input type="text" name="age" id="age" value="<%= user.dob.age%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender" class="text-light">Gender</label>
+                        <input type="text" id="gender" value="<%= user.gender%>">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn text-dark update" onclick="updateuser()">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+    <script>
+        function updateuser() {
+            fetch('/api/users/<%= user._id%>',
+                {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        "gender": document.getElementById("gender").value,
+                        "name.first": document.getElementById("first").value,
+                        "name.last": document.getElementById("last").value,
+                        "location.city": document.getElementById("city").value,
+                        "location.state": document.getElementById("state").value,
+                        "location.country": document.getElementById("country").value,
+                        "location.postcode": document.getElementById("pincode").value,
+                        "email": document.getElementById("email").value,
+                        "login.username": document.getElementById("username").value,
+                        "dob.date": document.getElementById("date").value,
+                        "dob.age": document.getElementById("age").value,
+                        "phone": document.getElementById("phonenumber").value,
+                        "login.password": document.getElementById("password").value,
+                        "picture": "daddy.png",
+                        "thumbnail":document.getElementById("thumbnail").value
+                    })
+                }).then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    }
+                })
+                .catch(function (err) {
+                    console.info(err + " url: " + url);
+                });
+        }
+    </script>
+<%- include('include/_footer') %>

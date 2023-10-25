@@ -1,0 +1,20 @@
+
+<% for(var i = users.length-1; i > users.length-4; i--) { %>
+   
+    <tr>
+         <td><img class=""style="border-radius: 28px; height:55px;width: 55px;"src="<%=users[i].thumbnail%> " alt=""></td>
+        <td><%= users[i].name.first %></td>
+        <td><%= users[i].email %></td>
+        <td><%= users[i].location.city %></td>
+        <td><%= users[i].gender %></td>
+        <td><%= users[i].phone %></td>
+        <td>
+            <a href="/updateUser?id=<%= users[i]._id%>" class="btn border-shadow update">
+                <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
+            </a>
+            <a class="btn border-shadow delete" data-id=<%= users[i]._id%> >
+                <span class="text-gradient"><i class="fas fa-times"></i></span>
+            </a>
+        </td>
+    </tr>
+<% } %>
